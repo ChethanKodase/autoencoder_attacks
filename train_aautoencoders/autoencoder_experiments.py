@@ -51,14 +51,17 @@ print('train_class_fracs', train_class_fracs )
 print('test_class_fracs', test_class_fracs )
 
 set_batch_size = 200
-train_batches, test_batches, no_channels, dx, dy = get_train_test_datasets_and_data_in_batches(train_class_fracs, test_class_fracs, set_batch_size, dataset = "FashionMNIST")
+#train_batches, test_batches, no_channels, dx, dy = get_train_test_datasets_and_data_in_batches(train_class_fracs, test_class_fracs, set_batch_size, dataset = "FashionMNIST")
 
+train_batches, test_batches, no_channels, dx, dy = get_train_test_datasets_and_data_in_batches(train_class_fracs, test_class_fracs, set_batch_size, dataset = "MNIST")
 
 print("train_batches.shape", train_batches.shape)
 print("test_batches.shape", test_batches.shape)
 
 # To check the population of different classes in train and test datasets
-dataset = "FashionMNIST"
+#dataset = "FashionMNIST"
+dataset = "MNIST"
+
 get_dataset_class_stats(train_class_fracs, test_class_fracs, class_labels, dataset)
 
 
@@ -67,7 +70,7 @@ layer_size = 100
 latent_dim = 4
 no_layers = 3
 activation = Sin()
-no_epochs = 1000
+no_epochs = 100
 lr = 0.0001
 
 
@@ -114,10 +117,10 @@ activation_cnn_vae = torch.nn.ReLU()
 
 train_AE_MLP= False
 train_AE_REG = False
-train_CNN_AE = True
+train_CNN_AE = False
 train_Contra_AE = False
 train_MLPVAE= False
-train_CNN_VAE = False
+train_CNN_VAE = True
 
 if(train_AE_MLP):
     train_MLPAE(no_epochs, train_batches, no_channels, dx, dy, layer_size, latent_dim, no_layers, activation, lr, device,
